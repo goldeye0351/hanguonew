@@ -7,7 +7,7 @@ import CategoryList from '@/components/category-list';
 import { Post } from '@/types/post';
 
 export default function PostCard({
-  post: { slug, title, date, cover, categories, blurUrl },
+  post: { slug,emoji,link,summary, type,title, date, cover, categories, blurUrl },
 }: {
   post: Post;
 }) {
@@ -24,9 +24,12 @@ export default function PostCard({
             blurDataURL={blurUrl}
           />
         </div>
+        {link}{type}
         <div className="flex h-48 flex-col p-4">
-          <h3 className="line-clamp-2 h-16 text-2xl font-bold">{title}</h3>
+          <h3 className="line-clamp-2 h-16 text-2xl font-bold">{emoji}{title}</h3>
+          <h1 > {summary}</h1>
           <time className="mb-4 mt-2 pl-2 text-sm text-gray-400">{date}</time>
+          {type}
           <CategoryList categories={categories} />
         </div>
       </article>

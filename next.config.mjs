@@ -20,6 +20,22 @@ const nextConfig = {
         protocol: 'https',
         hostname: '51xmi.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'http',
+        hostname: 'static.anzifan.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'pichub.51xmi.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+      },
     ],
   },
 

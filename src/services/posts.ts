@@ -16,7 +16,8 @@ export async function getAllPostsFromNotion() {
   Object.keys(block).forEach((pageId) => {
     if (
       block[pageId].value.type === 'page' &&
-      block[pageId].value.properties[propertyMap['Slug']]
+      block[pageId].value.properties[propertyMap['slug']]
+      &&block[pageId].value.properties[propertyMap['tags']]
     ) {
       const { properties, last_edited_time } = block[pageId].value;
 
@@ -29,20 +30,23 @@ export async function getAllPostsFromNotion() {
       const lastEditedAt = dates[0];
 
       const id = pageId;
-      const slug = properties[propertyMap['Slug']][0][0];
-      const title = properties[propertyMap['Page']][0][0];
-      const categories = properties[propertyMap['Category']][0][0].split(',');
-      const cover = properties[propertyMap['Cover']][0][1][0][1];
-      const date = properties[propertyMap['Date']][0][1][0][1]['start_date'];
-      const published = properties[propertyMap['Published']][0][0] === 'Yes';
+      const slug = properties[propertyMap['slug']][0][0];
+      const title = properties[propertyMap['title']][0][0];
+      const categories = properties[propertyMap['tags']][0][0].split(',');
+      const cover = block[pageId].value?.format?.page_cover || 'https://51xmi.com/51.png';
+      const date = properties[propertyMap['date']][0][1][0][1]['start_date'];
+      const published = properties[propertyMap['status']][0][0] == 'Published';
+      const emoji=block[pageId].value?.format?.page_icon 
+      const link = properties[propertyMap['Link']];
+      const summary = properties[propertyMap['summary']][0][0];
+      const type = properties[propertyMap['type']];
 
       allPosts.push({
         id,
+        emoji,link,summary,type,
         title,
         slug,
         categories,
-        // Fix 403 error for images.
-        // https://github.com/NotionX/react-notion-x/issues/211
         cover: mapImageUrl(cover, block[pageId].value) || '',
         date,
         published,
