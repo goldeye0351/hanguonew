@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 
-import Paginate from '@/components/paginate';
+//import Paginate from '@/components/paginate';
 import PostCard from '@/components/posts/post-card';
 import usePosts from '@/hooks/use-posts';
 import { Post } from '@/types/post';
@@ -30,7 +30,6 @@ export default function PostsGrid({ allPosts }: { allPosts: Post[] }) {
       ) : (
         <p className="mt-10 text-center text-lg">No matching posts found</p>
       )}
-      <Paginate totalPages={totalPages} elementToScroll={rootRef.current} />
     </section>
   );
 }
