@@ -33,7 +33,7 @@ export async function getAllPostsFromNotion() {
       const slug = properties[propertyMap['slug']][0][0];
       const title = properties[propertyMap['title']][0][0];
       const categories = properties[propertyMap['tags']][0][0].split(',');
-      const cover = block[pageId].value?.format?.page_cover || 'https://51xmi.com/51.png';
+      //const cover = block[pageId].value?.format?.page_cover || 'https://51xmi.com/51.png';
       const date = properties[propertyMap['date']][0][1][0][1]['start_date'];
       const published = properties[propertyMap['status']][0][0] == 'Published';
       const emoji=block[pageId].value?.format?.page_icon 
@@ -47,7 +47,7 @@ export async function getAllPostsFromNotion() {
         title,
         slug,
         categories,
-        cover: mapImageUrl(cover, block[pageId].value) || '',
+        //cover:null,// mapImageUrl(cover, block[pageId].value) || '',
         date,
         published,
         lastEditedAt,
@@ -55,9 +55,9 @@ export async function getAllPostsFromNotion() {
     }
   });
 
-  const blurImagesPromises = allPosts.map((post) => getBlurImage(post.cover));
-  const blurImages = await Promise.all(blurImagesPromises);
-  allPosts.forEach((post, i) => (post.blurUrl = blurImages[i].base64));
+  //const blurImagesPromises = allPosts.map((post) => getBlurImage(post.cover));
+  //const blurImages = await Promise.all(blurImagesPromises);
+  //allPosts.forEach((post, i) => (post.blurUrl = blurImages[i].base64));
 
   return allPosts;
 }
