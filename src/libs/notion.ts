@@ -1,22 +1,22 @@
 import { NotionAPI } from 'notion-client';
 import { Block } from 'notion-types';
-import cache from 'memory-cache'
+//import cache from 'memory-cache'
 const notion = new NotionAPI({
   authToken: process.env.NOTION_AUTH_TOKEN,
 });
 
 export async function getRecordMap(id: string) {
-  console.log('[Fetching Data]', id)
+  //console.log('[Fetching Data]', id)
   // Check if the record map is already in the cache
-const cachedRecordMap = cache.get(id);
+//const cachedRecordMap = cache.get(id);
   // If the record map is in the cache, return it
-if (cachedRecordMap) {    return cachedRecordMap;  }
+//if (cachedRecordMap) {    return cachedRecordMap;  }
 
   //return notion.getPage(id);
   const recordMap = await notion.getPage(id);
 
         // Store the record map in the cache
-  cache.put(id, recordMap);
+  //cache.put(id, recordMap);
 
         // Return the record map
   return recordMap;
