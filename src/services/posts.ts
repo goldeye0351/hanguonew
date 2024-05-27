@@ -1,11 +1,8 @@
-import { getRecordMap } from '@/libs/notion';
+import { getRecordMap, mapImageUrl } from '@/libs/notion';
 import { Post } from '@/types/post';
-import cache from 'memory-cache'
-export async function getAllPostsFromNotion() {
-  const cachedData = cache.get('postlist');
-  // If the data is in the cache, return it
-if (cachedData) {    return cachedData;  }
+import { getBlurImage } from '@/utils/get-blur-image';
 
+export async function getAllPostsFromNotion() {
   const allPosts: Post[] = [];
   const recordMap = await getRecordMap(process.env.NOTION_DATABASE_ID!);
   const { block, collection } = recordMap;
@@ -61,6 +58,6 @@ if (cachedData) {    return cachedData;  }
   //const blurImagesPromises = allPosts.map((post) => getBlurImage(post.cover));
   //const blurImages = await Promise.all(blurImagesPromises);
   //allPosts.forEach((post, i) => (post.blurUrl = blurImages[i].base64));
-  cache.put('postlist', allPosts);
+
   return allPosts;
 }
