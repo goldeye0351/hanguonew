@@ -14,8 +14,9 @@ export default async function PostPage({
   params: { slug: string };
 }) {
   const allPosts = await getAllPostsFromNotion();
+  const onlyposts=allPosts.filter((post) =>post.type == 'Post');
 
-  const post = allPosts.find((p) => p.slug == slug);
+  const post = onlyposts.find((p) => p.slug == slug);
   if (!post) {
     return notFound();
   }
